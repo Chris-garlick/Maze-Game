@@ -9,4 +9,7 @@ class Passage {
             this.isExit = false;
         }
     }
+    getExit() {
+        return this.isExit;
+    }
 }

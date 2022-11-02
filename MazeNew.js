@@ -18,39 +18,73 @@ class Maze {
             let room = this.rooms[0]
             let downRoom = this.rooms[5]
             let rightRoom = this.rooms[1]
-            // MAKE RIGHT CONNECTION
-            console.log(room + ' room.east')
-            console.log(rightRoom + ' rightRoom');
-            this.makeConnection(room, downRoom, rightRoom, 0)
+            let roomJSON = JSON.stringify(room)
+            downRoom = JSON.stringify(downRoom)
+            rightRoom = JSON.stringify(rightRoom)
+            console.log(roomJSON + ' json')
+            // MAKE RIGHT CONNECTION  
+            this.makeConnection(room, roomJSON, downRoom, rightRoom, 0)
             // MAKE DOWN CONNETION
-            console.log(rightRoom + ' rightRoom.west')
-            this.makeConnection(room, downRoom, rightRoom, 1)
+            // this.makeConnection(room, roomJSON, downRoom, rightRoom, 1)
         // }
     }
-    makeConnection(room, downRoom, rightRoom, direction) {
+    makeConnection(room, roomJSON, downRoom, rightRoom, direction) {
         // RIGHT
-        if (direction === 0) {
-            if (room.east !== null && rightRoom.west !== null) {
-                console.log('Connection made')
-            } else if (room.east !== null && rightRoom.west === null) {
-                console.log('Connection needed from source cell')
-            } else if (room.east === null && rightRoom.west !== null) {
-                console.log('Connection needed from right room')
-            } else {
-                console.log('No Connection to be made')
+        
+        console.log(room + ' room');
+        setTimeout(function() {
+            if (direction === 0) {
+                if(room['east']){
+                    console.log('room east')
+                    var eastRoom = room['east'];
+                    if (eastRoom === undefined && rightRoom['west'] !== undefined) {
+                        eastRoom = room['east']['isExit'] = false;
+                    }
+                }
+                if(rightRoom['west']){
+                    console.log('room west')
+                    var westRoom = room['west']['isExit'];
+                    if (westRoom === undefined) {
+                        westRoom = room['west']['isExit'] = false;
+                    }
+                }
+                
+                console.log(eastRoom);
+                console.log(westRoom);
+                // console.log(room['east']['isExit'])
+                // console.log(rightRoom)
+                if(westRoom && eastRoom){
+
+                }
+                if (eastRoom['east']['isExit'] || westRoom['west']['isExit']) {
+                    eastRoom['east']['isExit'] = false;
+                    westRoom['east']['isExit'] = false;
+                    // if (room['east']['isExit'] === false && rightRoom['west']['isExit'] === false) {
+                    //     console.log('Connection there')
+                    // } else if (room['east']['isExit'] === false  && rightRoom['west']['isExit'] !== false) {
+                    //     console.log('Connection needed from source cell')
+                    // } else if (eastRoom !== {"isExit":false} && westRoom === {"isExit":false}) {
+                    //     console.log('Connection needed from right room')
+                    // } else if (eastRoom !== {"isExit":false} && westRoom !== {"isExit":false}) {
+                    //     console.log('No Connection to be made')
+                    // }
+                } else {
+                    console.log('both are undefined')
+                }
+            }  else {
+                // DOWN
+                if (room.south !== null && downRoom.north !== null) {
+                    console.log('Down Connection made')
+                } else if (room.south !== null && downRoom.north === null) {
+                    console.log('Down Connection needed from source cell')
+                } else if (room.south === null && downRoom.north !== null) {
+                    console.log('Down Connection needed from right room')
+                } else {
+                    console.log('Down No Connection to be made')
+                }
             }
-        }  else {
-            // DOWN
-            if (room.south !== null && rightRoom.north !== null) {
-                console.log('Connection made')
-            } else if (room.south !== null && rightRoom.north === null) {
-                console.log('Connection needed from source cell')
-            } else if (room.south === null && rightRoom.north !== null) {
-                console.log('Connection needed from right room')
-            } else {
-                console.log('No Connection to be made')
-            }
-        }
+        }, 2000)
+
     }
     createRooms() {
         for (let i = 0; i < this.rooms.length; i++) {
