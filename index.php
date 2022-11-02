@@ -19,6 +19,7 @@
     <script src="Room.js"></script>
     <script src="MazeNew.js"></script>
     <script src="Player.js"></script>
+    <script src="Enemy.js"></script>
     <script> 
 
     $(document).ready(function(){
@@ -27,10 +28,8 @@
         maze.createRooms();
         maze.displayRooms();
         // maze.sortLayout();
-        var hero = new Player();
-        hero.setPlayer();
         $(document).keydown(function(e) {
-            hero.movePlayer(e)
+            maze.movePlayer(e)
         })
 
         // var img = document.getElementsByClassName('hero');

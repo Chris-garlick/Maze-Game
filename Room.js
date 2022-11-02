@@ -7,23 +7,8 @@ class Room {
         this.west;
         this.passages = [];
         this.bool = bool;
-    }
-    toString(dir) {
-        // if (this.north !== null) {
-        //     this.north = "{'isExit': false}"
-        // }
-        // if (this.east !== null) {
-        //     this.east = "{'isExit': false}"
-        // }
-        // if (this.south !== null) {
-        //     this.south = "{'isExit': false}"
-        // }
-        // if (this.west !== null) {
-        //     this.west = "{'isExit': false}"
-        // }
-        if (this.dir === undefined) {
-            this.dir = false
-        }
+        this.enemy = false;
+        this.treasure = false;
     }
     getPassage(n) {
         // CREATE A NEW PASSAGE AND ASSIGN TO NORTH EAST SOUTH OR WEST
@@ -78,5 +63,19 @@ class Room {
             }  
         }
         console.log(this.passages)
+    }
+    setTreasureOrEnemy() {
+        if (this.enemy === false && this.treasure === false) {
+            let ran = Math.floor(Math.random() * 2)
+            if (ran === 0) {
+                this.enemy = true;
+                this.treasure = false;
+            } else if (ran === 1) {
+                this.enemy = false;
+                this.treasure = true;
+            } else {
+                console.log('WTF ')
+            }
+        }
     }
 }
