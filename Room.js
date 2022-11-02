@@ -1,10 +1,10 @@
 class Room {
     constructor(bool) {
         this.id = 0;
-        this.north = null;
-        this.east = null;
-        this.south = null;
-        this.west = null;
+        this.north;
+        this.east;
+        this.south;
+        this.west;
         this.passages = [];
         this.bool = bool;
     }
@@ -21,8 +21,8 @@ class Room {
         // if (this.west !== null) {
         //     this.west = "{'isExit': false}"
         // }
-        if (this.dir === null) {
-            this.dir = "{'isExit': false}"
+        if (this.dir === undefined) {
+            this.dir = false
         }
     }
     getPassage(n) {
@@ -41,6 +41,8 @@ class Room {
                 console.log(this.north + ' getPassage')
                 console.log(JSON.stringify(this.north + ' getPassage JSON'))
                 this.passages.push('north');
+                this.toString('north')
+                console.log(this.north + ' NORTH FROM PASSAGE')
             } else if (rand == 1) {
             //     var bool = new Passage();
             //     bool = bool.setExit(this.bool);

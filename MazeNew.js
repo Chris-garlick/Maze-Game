@@ -18,33 +18,63 @@ class Maze {
             let room = this.rooms[0]
             let downRoom = this.rooms[5]
             let rightRoom = this.rooms[1]
-            let roomJSON = JSON.stringify(room)
-            downRoom = JSON.stringify(downRoom)
-            rightRoom = JSON.stringify(rightRoom)
-            console.log(roomJSON + ' json')
+            room = JSON.stringify(room);
+            downRoom = JSON.stringify(downRoom);
+            rightRoom = JSON.stringify(rightRoom);
+
+            if (room.includes('east') && rightRoom.includes('west')) {
+                console.log(room + ' room')
+                console.log(rightRoom + ' right room')
+                console.log('No Connection Needed')
+            } else if (!room.includes('east') && rightRoom.includes('west')) {
+                console.log(room + ' room')
+                console.log(rightRoom + ' right room')
+                this.rooms[0].east = {'isExit':false}
+                $('.0').addClass('east')
+                console.log('Connection needed from target cell')
+                console.log(this.rooms[0].east);
+                console.log(rightRoom + ' rr');
+            } else if (room.includes('east') && !rightRoom.includes('west')) {
+                console.log(room + ' room')
+                console.log(rightRoom + ' right room')
+                console.log('Connectioned needed from right Room')
+            } else if (!room.includes('east') && !rightRoom.includes('west')) {
+                console.log(room + ' room')
+                console.log(rightRoom + ' right room')
+                console.log('No Connection Required to be built.')
+            } else {
+                console.log('ermmmm');
+            }
+            // let roomJSON = JSON.stringify(room)
+            // downRoom = JSON.stringify(downRoom)
+            // rightRoom = JSON.stringify(rightRoom)
+            // console.log(roomJSON + ' json')
             // MAKE RIGHT CONNECTION  
-            this.makeConnection(room, roomJSON, downRoom, rightRoom, 0)
+            // this.makeConnection(room, roomJSON, downRoom, rightRoom, 0)
             // MAKE DOWN CONNETION
             // this.makeConnection(room, roomJSON, downRoom, rightRoom, 1)
         // }
     }
     makeConnection(room, roomJSON, downRoom, rightRoom, direction) {
         // RIGHT
-        
         console.log(room + ' room');
+        console.log(room + ' THIS IS A TEST');
+        var newRoom = JSON.stringify(room)
+        console.log(newRoom + ' new room')
+        console.log(newRoom['east'] + ' NEW ROOM')
         setTimeout(function() {
             if (direction === 0) {
                 if(room['east']){
                     console.log('room east')
                     var eastRoom = room['east'];
-                    if (eastRoom === undefined && rightRoom['west'] !== undefined) {
+                    if (eastRoom === null && rightRoom['west'] !== null) {
                         eastRoom = room['east']['isExit'] = false;
                     }
                 }
                 if(rightRoom['west']){
                     console.log('room west')
                     var westRoom = room['west']['isExit'];
-                    if (westRoom === undefined) {
+                    if (westRoom === null) {
                         westRoom = room['west']['isExit'] = false;
                     }
                 }
@@ -93,29 +123,19 @@ class Maze {
             let westEmpty = this.rooms[i].west
             let southEmpty = this.rooms[i].south
             if (northEmpty !== null) {
-                console.log(northEmpty + ' north Empty')
+                // console.log(northEmpty + ' north Empty')
             } 
             if (eastEmpty !== null) {
-                console.log(eastEmpty + ' east Empty')
+                // console.log(eastEmpty + ' east Empty')
             } 
             if (westEmpty !== null) {
-                console.log(westEmpty + ' west Empty')
+                // console.log(westEmpty + ' west Empty')
             } 
             if (southEmpty !== null) {
-                console.log(southEmpty + ' south Empty')
+                // console.log(southEmpty + ' south Empty')
             } 
             // this.sortLayout(i, northEmpty, southEmpty, eastEmpty, westEmpty)
             this.createHTMLEle(this.rooms[i], this.rooms[i].north, this.rooms[i].south, this.rooms[i].east, this.rooms[i].west)
-            // this.sortLayout(i)
-        }
-    }
-    sortLayout() {
-// USE JQUERY AND CSS TO TARGET DIVS AT LOOP AND REMOVE CERTAIN BORDERS
-        if ($(`.0`).hasClass('north')) {
-            $(`.0`).removeClass('north')
-        }
-        if ($('.0').hasClass('west')) {
-            $(`.0`).removeClass('west')
         }
     }
     createHTMLEle(room, north, south, east, west) {
