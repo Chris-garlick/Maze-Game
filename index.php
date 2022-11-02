@@ -26,6 +26,7 @@
         maze.genRooms();
         maze.createRooms();
         maze.displayRooms();
+        // maze.sortLayout();
         var hero = new Player();
         hero.setPlayer();
         $(document).keydown(function(e) {

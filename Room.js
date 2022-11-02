@@ -29,18 +29,25 @@ class Room {
             if (rand == 0) {
                 this.north = new Passage();
                 this.north.setExit(this.bool);
+                console.log(this.north + ' getPassage')
+                console.log(JSON.stringify(this.north + ' getPassage JSON'))
                 this.passages.push('north');
             } else if (rand == 1) {
                 this.east = new Passage();
                 this.east.setExit(this.bool);
+                console.log(this.east + ' getPassage')
                 this.passages.push('east');
             } else if (rand == 2) {
                 this.south = new Passage(); 
                 this.south.setExit(this.bool);
+                console.log(this.south + ' getPassage')
+
                 this.passages.push('south');
             } else if (rand == 3) {
                 this.west = new Passage();
                 this.west.setExit(this.bool);
+                console.log(this.west + ' getPassage')
+
                 this.passages.push('west');
             }  
         }

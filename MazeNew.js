@@ -10,6 +10,47 @@ class Maze {
         this.mazeDivs.forEach(div => {
             maze.append(div);
         });
+        this.removePassages();
+    }
+    removePassages() {
+        // for (let i = 0; i < this.rooms.length; i++) {
+            console.log(this.rooms)
+            let room = this.rooms[0]
+            let downRoom = this.rooms[5]
+            let rightRoom = this.rooms[1]
+            // MAKE RIGHT CONNECTION
+            console.log(room + ' room.east')
+            console.log(rightRoom + ' rightRoom');
+            this.makeConnection(room, downRoom, rightRoom, 0)
+            // MAKE DOWN CONNETION
+            console.log(rightRoom + ' rightRoom.west')
+            this.makeConnection(room, downRoom, rightRoom, 1)
+        // }
+    }
+    makeConnection(room, downRoom, rightRoom, direction) {
+        // RIGHT
+        if (direction === 0) {
+            if (room.east !== null && rightRoom.west !== null) {
+                console.log('Connection made')
+            } else if (room.east !== null && rightRoom.west === null) {
+                console.log('Connection needed from source cell')
+            } else if (room.east === null && rightRoom.west !== null) {
+                console.log('Connection needed from right room')
+            } else {
+                console.log('No Connection to be made')
+            }
+        }  else {
+            // DOWN
+            if (room.south !== null && rightRoom.north !== null) {
+                console.log('Connection made')
+            } else if (room.south !== null && rightRoom.north === null) {
+                console.log('Connection needed from source cell')
+            } else if (room.south === null && rightRoom.north !== null) {
+                console.log('Connection needed from right room')
+            } else {
+                console.log('No Connection to be made')
+            }
+        }
     }
     createRooms() {
         for (let i = 0; i < this.rooms.length; i++) {
@@ -31,10 +72,10 @@ class Maze {
             } 
             // this.sortLayout(i, northEmpty, southEmpty, eastEmpty, westEmpty)
             this.createHTMLEle(this.rooms[i], this.rooms[i].north, this.rooms[i].south, this.rooms[i].east, this.rooms[i].west)
-            this.sortLayout(i)
+            // this.sortLayout(i)
         }
     }
-    sortLayout(i) {
+    sortLayout() {
 // USE JQUERY AND CSS TO TARGET DIVS AT LOOP AND REMOVE CERTAIN BORDERS
         if ($(`.0`).hasClass('north')) {
             $(`.0`).removeClass('north')
