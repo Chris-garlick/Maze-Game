@@ -10,16 +10,34 @@
 </head>
 <body>
     <!-- <canvas width="500" height="500" id="canvas"></canvas> -->
-    <div id="maze">
-        <img class="hero" src="./img/hero.png" alt="">
+    <div class="leftSide">
+
+        <div id="maze">
+            <!-- <img class="hero" src="./img/hero.png" alt=""> -->
+        </div>
+        <div class="gameOver hide">
+            <h1>Congratulations! You have beaten the maze</h1>
+            <div class="wealth">Total Gold: <span>0</span></div>
+            <div class="moves">Total Moves: <span>0</span></div>
+            <div class="playAgain"><a href="">Play Again</a></div>
+        </div>
     </div>
-    <script src="Maps.js"></script>
-    <!-- <script src="Maze.js"></script> -->
+    <div class="rightSide">
+        <div class="gameScore">
+            <div class="wealth">Gold: <span></span></div>
+            <div class="moves">Moves: <span>0</span></div>
+            <div class="playAgain"><a href="">Play Again</a></div>
+        </div>
+    </div>
+    <script src="Maze.js"></script>
     <script src="Passage.js"></script>
     <script src="Room.js"></script>
-    <script src="MazeNew.js"></script>
     <script src="Player.js"></script>
-    <script src="Enemy.js"></script>
+
+    <script src="PassageTest.js"></script>
+    <script src="RoomTest.js"></script>
+    <script src="PlayerTest.js"></script>
+    <script src="MazeTest.js"></script>
     <script> 
 
     $(document).ready(function(){
@@ -27,24 +45,19 @@
         maze.genRooms();
         maze.createRooms();
         maze.displayRooms();
-        // maze.sortLayout();
+
+        // maze.genRooms();
+        // maze.createRooms()
+        // maze.displayRooms()
+        // this.createRooms();
+        // this.displayRooms();
+
+
         $(document).keydown(function(e) {
             maze.movePlayer(e)
         })
-
-        // var img = document.getElementsByClassName('hero');
-        // console.log(img)
-        // console.log(img.style)
-        // img.style.top -= "50px";
     }); 
     
-        // var maze = new Maze();
-        // maze.drawRoomsNew();
-        // maze.createRooms();
-        // console.log(maze.rooms);
-        // maze.drawRooms();
-        // console.log(maze.rooms.length)
-        // maze.insertHTML();
 
 
     </script>

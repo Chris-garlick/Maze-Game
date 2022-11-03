@@ -1,114 +1,56 @@
 class Player {
     constructor() {
-        this.cell = 0;
+        this.cell = this.randomisePlayerPostion();
+        this.wealth = 0;
+        this.moves = 0;
     }
-    setPlayer() {
-        var start = document.getElementsByClassName(`.${this.cell}`)
-        start.innerHTML = '<img src="./img/hero.png"></img>'
+    randomisePlayerPostion() {
+        var rand = Math.floor(Math.random() * 24)
+        return rand;
     }
     checkBottomBorder(heroX) {
         // top = 15 right = 215 left = 15 bottom = 215;
-        if (heroX < 200) {
-            console.log(heroX + 'hero X from')
+        if ((heroX === 21) || (heroX === 22) || (heroX === 23) || (heroX === 24)) {
+            return false;
+        } else {
             return true;
         }
     }
     checkRightBorder(heroY) {
         // CHECK RIGHT
-        if (heroY < 200) {
+        if ((heroY === 0) || (heroY === 5) || (heroY === 10) || (heroY === 15) || (heroY === 20)) {
+            return false;
+        } else {
             return true;
         }
     }
     checkTopBorder(heroX) {
         // // CHECK UP
-        if (heroX > 50) {
-            console.log(heroX + 'heroX from up')
+        if ((heroX === 0) || (heroX === 1) || (heroX === 2) || (heroX === 3) || (heroX === 4)) {
+            return false;
+        } else {
             return true;
         }
     }
     checkLeftBorder(heroY) {
         // CHECK LEFT
-        if (heroY > 50) {
+        if ((heroY === 4) || (heroY === 9) || (heroY === 14) || (heroY === 19) || (heroY === 24))  {
+            return false;
+        } else {
             return true;
         }
     }
-    getHeroDetails() {
-        var hero = $('.hero');
-        var heroX = hero.css('top');
-        var heroY = hero.css('left');
-        heroX = heroX.replace('px','')
-        heroX = parseInt(heroX);
-        heroY = heroY.replace('px', '');
-        heroY = parseInt(heroY);
-        return [heroX, heroY]
-    }
-    // movePlayer(e) {
-    //     if (!e.repeat) {
-    //         if (e.keyCode === 40) {
-    //             // DOWN - 40
-    //             console.log(this.cell)
-    //             var canMove = $(`.${this.cell}`).hasClassName('south');
-    //             if (canMove) {
-    //                 console.log('Free to move')
-    //             } else {
-    //                 console.log('not free to move')
-    //             }
-    //             this.cell += 5;
-    //             this.setPlayer();
-    //             var details = this.getHeroDetails();
-    //             var heroX = details[0];
-    //             console.log(heroX)
-    //             if (this.checkBottomBorder(heroX)) {
-    //                 $('.hero').finish().animate({top: "+=50"} , 200, 'linear');
-    //             }
-    //         } else if (e.keyCode === 37) {
-    //             // LEFT - 37
-    //             this.cell -= 1;
-    //             this.setPlayer();
-    //             // $('.hero').css('left', -50);
-    //             var details = this.getHeroDetails();
-    //             var heroY = details[1];
-    //             if (this.checkLeftBorder(heroY)) {
-    //                 $('.hero').finish().animate({left: "-=50"}, 200, 'linear');
-    //             }
-    //         } else if (e.keyCode === 38) {
-    //             // UP - 38
-    //             this.cell -= 5;
-    //             this.setPlayer();
-    //             // $('.hero').css('top', -50);
-    //             var details = this.getHeroDetails();
-    //             var heroX = details[0];
-    //             if (this.checkTopBorder(heroX)) {
-    //                 $('.hero').finish().animate({top: "-=50"}, 200, 'linear');
-    //             }
-    //         } else if (e.keyCode === 39) {
-    //             // RIGHT - 39
-    //             this.cell -= 5;
-    //             this.setPlayer();
-    //             // $('.hero').css('right', 50);
-    //             var details = this.getHeroDetails();
-    //             var heroY = details[1];
-    //             if (this.checkRightBorder(heroY)) {
-    //                 $('.hero').finish().animate({left: "+=50"}, 200, 'linear');
-    //             }
-    //         } else {
-    //             console.log('error on move')
-    //         }
-    //     }
+    // getHeroDetails() {
+    //     var hero = $('.hero');
+    //     var heroX = hero.css('top');
+    //     var heroY = hero.css('left');
+    //     heroX = heroX.replace('px','')
+    //     heroX = parseInt(heroX);
+    //     heroY = heroY.replace('px', '');
+    //     heroY = parseInt(heroY);
+    //     return [heroX, heroY]
     // }
 }
 
-$.fn.extend({
-    hasClassName: function (selectors) {
-        var self = this;
-        var count = 0;
-        var classes 
-        for (var i in selectors) {
-            if ($(self).hasClass(selectors[i])) {
-                
-            }
-        }
-        return count;
-    }
-});
+
 

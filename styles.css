@@ -1,10 +1,16 @@
 body {
     display: flex;
+}
+.leftSide {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     width: 23%;
+}
+.leftSide.over {
+    width: 100%;
 }
 div {
     height: 50px;
@@ -40,9 +46,9 @@ div.enemy {
     background-image: url('./img/enemy.png');
     background-size: cover;
 }
-div:nth-of-type(1) {
+/* div:nth-of-type(1) {
     background-image: none;
-}
+} */
 div#maze {
     border: 1px solid black !important;
     height: 260px;
@@ -60,9 +66,61 @@ div#maze {
 }
 
 .hero {
-    height: 40px;
-    width: 40px;
-    position: absolute;
-    top: 15px;
-    left: 40px;
+    background-image: url('./img/hero.png');
+    background-size: cover;
+}
+/* @media only screen and (min-width: 1300px) {
+    .hero {
+        left: 35px;
+    }
+}
+@media only screen and (min-width: 1400px) {
+    .hero {
+        left: 46px;
+    }
+}
+@media only screen and (min-width: 1600px) {
+    .hero {
+        left: 60px;
+    }
+} */
+.gameOver {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.hide {
+    display: none;
+}
+.gameOver .wealth, .gameOver .moves {
+    width: 30%;
+}
+.last {
+    border-bottom: 5px solid green !important;
+    border-right: 5px solid green !important;
+}
+.gameOver h1 {
+    margin-top: 70px;
+}
+.gameScore .playAgain, .gameOver .playAgain {
+    width: 200%;
+    padding: 0px 5px;
+    background: darkblue;
+    color: white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gameOver .playAgain {
+    width: 15%;
+    height: auto;
+    padding: 10px 5px;
+    margin-top: 50px;
+}
+.gameScore .playAgain a, .gameOver .playAgain a {
+    color: white;
+    text-decoration: none;
 }
