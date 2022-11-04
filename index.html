@@ -9,25 +9,29 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- <canvas width="500" height="500" id="canvas"></canvas> -->
-    <div class="leftSide">
+    <div class="game">
+        <div class="top">
+            <h1>Welcome!</h1>
+            <p>Use the arrow keys to get as much wealth as possible.</p>
+            <p>Find the exit to leave and win.</p>
+        </div>
+        <div class="leftSide">
 
-        <div id="maze">
-            <!-- <img class="hero" src="./img/hero.png" alt=""> -->
+            <div id="maze"></div>
+            <div class="gameOver hide">
+                <h1>Congratulations! You have beaten the maze</h1>
+                <div class="wealth">Total Gold: <span>0</span></div>
+                <div class="moves">Total Moves: <span>0</span></div>
+                <div class="playAgain"><a href="">Play Again</a></div>
+            </div>
         </div>
-        <div class="gameOver hide">
-            <h1>Congratulations! You have beaten the maze</h1>
-            <div class="wealth">Total Gold: <span>0</span></div>
-            <div class="moves">Total Moves: <span>0</span></div>
-            <div class="playAgain"><a href="">Play Again</a></div>
-        </div>
-    </div>
-    <div class="rightSide">
-        <div class="gameScore">
-            <div class="wealth">Gold: <span></span></div>
-            <div class="moves">Moves: <span>0</span></div>
-            <div class="playAgain"><a href="">Play Again</a></div>
-            <div class="userInfo"></div>
+        <div class="rightSide">
+            <div class="gameScore">
+                <div class="wealth">Gold: <span></span></div>
+                <div class="moves">Moves: <span>0</span></div>
+                <div class="playAgain"><a href="">Play Again</a></div>
+                <div class="userInfo"></div>
+            </div>
         </div>
     </div>
     <script src="Maze.js"></script>
