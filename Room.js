@@ -5,7 +5,6 @@ class Room {
         this.east;
         this.south;
         this.west;
-        this.passages = [];
         this.bool = bool;
         this.enemy = false;
         this.treasure = false;
@@ -19,24 +18,20 @@ class Room {
             if (rand == 0) {
                 this.north = new Passage();
                 this.north.setExit(this.bool);
-                this.passages.push('north');
             } else if (rand == 1) {
                 this.east = new Passage();
                 this.east.setExit(this.bool);
-                this.passages.push('east');
             } else if (rand == 2) {
                 this.south = new Passage(); 
                 this.south.setExit(this.bool);
-                this.passages.push('south');
             } else if (rand == 3) {
                 this.west = new Passage();
                 this.west.setExit(this.bool);
-                this.passages.push('west');
             }  
         }
-        console.log(this.passages)
     }
     setTreasureOrEnemy() {
+        // SETS EITHER TREASURE OR ENEMY IF BOTH ARE FALSE.
         if (this.enemy === false && this.treasure === false) {
             let ran = Math.floor(Math.random() * 2)
             if (ran === 0) {
@@ -45,22 +40,21 @@ class Room {
             } else if (ran === 1) {
                 this.enemy = false;
                 this.treasure = true;
-            } else {
-                console.log('erm ')
             }
         }
     }
     setLastExit(bool) {
+        // SETS FINAL EXIT
         var rand = Math.floor(Math.random() * 2)
         if (bool) {
             if (rand === 0) {
                 this.north = {'isExit':false}
                 this.east = {'isExit':true}
-                this.south = {'isExit':true}
+                return 'east';
             } else if (rand === 1) {
                 this.west = {'isExit:':false}
-                this.east = {'isExit':true}
                 this.south = {'isExit':true}
+                return 'south'
             }
         }
     }

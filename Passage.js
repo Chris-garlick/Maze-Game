@@ -3,6 +3,7 @@ class Passage {
         this.isExit;
     }
     setExit(bool) {
+        // SETS EXIT TO BE TRUE OF FALSE 
         if (bool) {
             this.isExit = true;
         } else {
@@ -10,6 +11,7 @@ class Passage {
         }
     }
     getExit() {
+        // RETURNS EXIT
         return this.isExit;
     }
 }

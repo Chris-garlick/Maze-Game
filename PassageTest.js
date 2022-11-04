@@ -10,3 +10,6 @@ function TestNewPassageTrue() {
     var passage = newPassage.getExit();
     console.assert(passage === true)
 }
+
+TestNewPassageFalse()
+TestNewPassageTrue()

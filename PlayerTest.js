@@ -43,12 +43,12 @@ function TestLeftBorderFails() {
     var bool = player.checkTopBorder(25);
     console.assert(bool === false)
 }
-TestNewPlayer();
-TestBottomBorderPasses()
-TestBottomBorderFails()
-TestRightBorderPasses()
-TestRightBorderFails()
-TestTopBorderPasses()
-TestTopBorderFails()
-TestLeftBorderPasses()
-TestLeftBorderFails()
+// TestNewPlayer();
+// TestBottomBorderPasses()
+// TestBottomBorderFails()
+// TestRightBorderPasses()
+// TestRightBorderFails()
+// TestTopBorderPasses()
+// TestTopBorderFails()
+// TestLeftBorderPasses()
+// TestLeftBorderFails()

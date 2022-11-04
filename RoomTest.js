@@ -1,18 +1,18 @@
 function TestCreateNewRoom() {
     var room = new Room();
     room = JSON.stringify(room);
-    console.assert(room === '{"id":0,"passages":[],"enemy":false,"treasure":false}')
+    console.assert(room === '{"id":0,"enemy":false,"treasure":false}')
 }
 
 function TestCreateNewRoomWithoutExit() {
     var room = new Room(false);
     room = JSON.stringify(room)
-    console.assert(room === '{"id":0,"passages":[],"bool":false,"enemy":false,"treasure":false}')
+    console.assert(room === '{"id":0,"bool":false,"enemy":false,"treasure":false}')
 }
 function TestCreateNewRoomWithExit() {
     var room = new Room(true);
     room = JSON.stringify(room)
-    console.assert(room === '{"id":0,"passages":[],"bool":true,"enemy":false,"treasure":false}')
+    console.assert(room === '{"id":0,"bool":true,"enemy":false,"treasure":false}')
 }
 function TestRoomWithNorthPassage() {
     var room = new Room(false);

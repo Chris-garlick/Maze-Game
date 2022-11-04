@@ -1,12 +1,11 @@
 class Maze {
     constructor() {
         this.rooms = [];
-        this.rows = 5;
-        this.cols = 5;
         this.mazeDivs = [];
         this.hero = new Player();
     }
     displayRooms() {
+        // LOOPS THROUGH MAZE DIVS AND OUTPUTS THEM ONTO DOM
         var maze = document.querySelector('#maze');
         this.mazeDivs.forEach(div => {
             maze.append(div);
@@ -16,6 +15,8 @@ class Maze {
     }
     removePassages() {
         for (let i = 0; i < this.rooms.length; i++) {
+            // LOOPS THROUGH CURRENT ROOM AND CHECKS 
+            // ADJACENT ROOMS FOR A PASSAGE. IF ONLY ONE HAS, CREATE A CONNETION
             let room = this.rooms[i]
             let downRoom = this.rooms[i+5]
             let upRoom = this.rooms[i-5]
@@ -40,7 +41,6 @@ class Maze {
                     // IF MAIN ROOM DOESNT BUT TARGET DOES
                     this.rooms[i].north = {'isExit':false}
                     $(`.${i}`).addClass('north')
-                    $(`.${i}`).css('border-right', "0px !important")
 
                 } else if (room.includes('north') && !upRoom.includes('south')) {
                     // IF MAIN ROOM DOES BUT TARGET DOESNT
@@ -51,8 +51,6 @@ class Maze {
                     // IF NEITHER DO
                     console.log('Up No Connection Required to be built.')
 
-                } else {
-                    console.log('ermmmm');
                 }
             }
             if (rightSide.includes(i)) {} else {
@@ -66,7 +64,6 @@ class Maze {
                     // IF MAIN ROOM DOESNT BUT TARGET DOES
                     this.rooms[i].east = {'isExit':false}
                     $(`.${i}`).addClass('east')
-                    $(`.${i}`).css('border-right', "0px !important")
 
                 } else if (room.includes('east') && !rightRoom.includes('west')) {
                     // IF MAIN ROOM DOES BUT TARGET DOESNT
@@ -76,7 +73,7 @@ class Maze {
                 } else if (!room.includes('east') && !rightRoom.includes('west')) {
                     // IF NEITHER DO
                     console.log('Right No Connection Required to be built.')
-                } else {}
+                } 
             }
             if (bottomSide.includes(i)) {} else {
                 if (room.includes('south') && downRoom.includes('north')) {
@@ -98,7 +95,7 @@ class Maze {
                 } else if (!room.includes('south') && !downRoom.includes('north')) {
                     console.log('Down No Connection Required to be built.')
 
-                } else {}
+                } 
             }     
             if (leftSide.includes(i)) {} else {
                 console.log(i + ' I')
@@ -121,7 +118,7 @@ class Maze {
                     // IF NEITHER DO
                     console.log('Up No Connection Required to be built.')
 
-                } else {}
+                } 
             }  
         }
     }
@@ -130,7 +127,7 @@ class Maze {
         let rightSide = [4, 9, 14, 19, 24]
         let bottomSide = [20, 21, 22, 23, 24]
         for (let i = 0; i < this.rooms.length; i++) {
-            // loop through maze and find any divs with only one class
+            // LOOP THROUGH MAZE AND TRY AND FIND DIVS WITH ONLY 1 CLASS
             var rand = Math.floor(Math.random() * 4)
             let thisDiv = $(`.${i}`)
             var count = thisDiv.hasClasses(classes);
@@ -138,23 +135,27 @@ class Maze {
                 if (!bottomSide.includes(i)){
                     if ((rand === 0) || (rand === 2)) {
                         if ($(`.${i}`).hasClass('north')) {
+                            // IF ONLY NORTH, ADD EAST
                             this.rooms[i].east = {'isExit':false};
                             this.rooms[i+1].west = {'isExit':false};
                             $(`.${i}`).addClass('east')  
                             $(`.${i+1}`).addClass('west')  
                         } else {
-                            this.rooms[i].north = {'isExit':false}
-                            this.rooms[i+5].south = {'isExit':false};
-                            $(`.${i}`).addClass('north')
-                            $(`.${i+5}`).addClass('south')
+                            // OTHERWISE, ADD NORTH
+                            this.rooms[i].south = {'isExit':false}
+                            this.rooms[i+5].north = {'isExit':false};
+                            $(`.${i}`).addClass('south')
+                            $(`.${i+5}`).addClass('north')
                         }
                     } else if ((rand === 1) || (rand === 3) ) {
                         if ($(`.${i}`).hasClass('east')) {
+                            // IF ONLY EAST ADD SOUTH
                             this.rooms[i].south = {'isExit':false};
                             this.rooms[i+5].north = {'isExit':false};
                             $(`.${i}`).addClass('south')  
                             $(`.${i+5}`).addClass('north')  
                         } else {
+                            // OTHERWISE ADD EAST
                             this.rooms[i].east = {'isExit':false}
                             this.rooms[i+1].west = {'isExit':false}
                             $(`.${i}`).addClass('east')
@@ -181,17 +182,17 @@ class Maze {
         }
     }
     createRooms() {
+        // LOOPS THROUGH LIST OF ROOMS AND CREATES AN HTML ELEMENT
         for (let i = 0; i < this.rooms.length; i++) {
             this.createHTMLEle(this.rooms[i], this.rooms[i].north, this.rooms[i].south, this.rooms[i].east, this.rooms[i].west, this.rooms[i].enemy, this.rooms[i].treasure, this.rooms[i].hero, this.rooms[i].last)
         }
     }
     createHTMLEle(room, north, south, east, west, item1, item2, hero, last) {
+        // CREATES A NEW HTML DIV ELEMENT WITH REQUIRED CLASS NAMES
         var newDiv = document.createElement('div');
         var className = room.id;
         newDiv.classList.add(className)
         if (north) {
-            north = JSON.stringify(north)
-            console.log(north + ' NORTH');
             newDiv.classList.add('north')
         }
         if (south) {
@@ -219,12 +220,13 @@ class Maze {
     }
     genRooms() {
         for (let i = 0; i <= 24; i++) {
+            // LOOPS THROUGH CREATING A LIST OF 25 ROOMS
             var rand = (Math.floor(Math.random() * 4) + 1)
             if (i == 24) {
                 var exitRoom = new Room(true);
                 exitRoom.id = i;
                 exitRoom.getPassage(rand);
-                exitRoom.setLastExit(true)
+                exitRoom.setLastExit(true);
                 exitRoom.last = true;
                 this.rooms.push(exitRoom);
             } else {
@@ -320,86 +322,83 @@ class Maze {
         heroCell = JSON.stringify(heroCell)
         if (!e.repeat) {
             if (e.keyCode === 40) {
+                // IF USER PRESSES DOWN
                 if (this.canMove(this.hero.cell, 'south')) {
-                    // DOWN - 40
+                    // IF PLAYER CAN MOVE DOWN
+                    $('.userInfo').html("")
                     if (heroCell === '24') {
+                        // IF HERO IS IN FINAL CELL
                         this.moveHero('south')
                         this.gameOver();
                     } else {
                         if (this.hero.checkBottomBorder(heroCell)) {
-                            console.log(this.hero.cell)
+                            // IF HERO IS INSIDE GAME BORDER
                             this.moveHero('south')
-                            $(`.${heroCell}`).removeClass('treasure');
-                            this.hero.wealth += 100;
-                            console.log(this.hero.wealth);
                             $('.wealth span').html(this.hero.wealth);
-                            $(`.${this.hero.cell}`).removeClass('enemy');
+                            this.hero.cell += 5
+                            this.hero.moves += 1;
+                            document.querySelector('.gameScore .moves span').innerHTML = this.hero.moves;
                         }
-                        this.hero.cell += 5
-                        this.hero.moves += 1;
-                        document.querySelector('.gameScore .moves span').innerHTML = this.hero.moves;
                     }
+                } else {
+                    $('.userInfo').html("You can't go that way!")
                 }
             } else if (e.keyCode === 37) {
-                console.log('left')
+                // IF USER PRESSES LEFT
                 if (this.canMove(this.hero.cell, 'west')) {
-                    // LEFT - 37
+                    // IF USER CAN MOVE LEFT
+                    $('.userInfo').html("")
                     if (this.hero.checkLeftBorder(heroCell)) {
-                        console.log(this.hero.cell)
+                        // IF HERO IS INSIDE GAME BORDER
                         this.moveHero('west')
-                        $(`.${heroCell}`).removeClass('treasure');
-                        this.hero.wealth += 100;
-                        console.log(this.hero.wealth);
                         $('.wealth span').html(this.hero.wealth);
-                        $(`.${this.hero.cell}`).removeClass('enemy');
-                    }
                         this.hero.cell -= 1;
                         this.hero.moves += 1;
                         document.querySelector('.gameScore .moves span').innerHTML = this.hero.moves;
+                    }
+                } else {
+                    $('.userInfo').html("You can't go that way!")
                 }
             } else if (e.keyCode === 38) {
-                console.log('up')
+                // IF USER PRESSES UP
                 if (this.canMove(this.hero.cell, 'north')) {
-                    // UP - 38
+                    // IF USER CAN MOVE UP 
+                    $('.userInfo').html("")
                     if (this.hero.checkTopBorder(heroCell)) {
-                        console.log(this.hero.cell)
+                        // IF HERO IS INSIDE GAME BORDER
                         this.moveHero('north')
-                        $(`.${heroCell}`).removeClass('treasure');
-                        this.hero.wealth += 100;
-                        console.log(this.hero.wealth);
                         $('.wealth span').html(this.hero.wealth);
-                        $(`.${this.hero.cell}`).removeClass('enemy');
+                        this.hero.cell -= 5;
+                        this.hero.moves += 1;
+                        document.querySelector('.gameScore .moves span').innerHTML = this.hero.moves;
                     }
-                    this.hero.cell -= 5;
-                    this.hero.moves += 1;
-                    document.querySelector('.gameScore .moves span').innerHTML = this.hero.moves;
-                }
+                } else {
+                    $('.userInfo').html("You can't go that way!")
+                } 
             } else if (e.keyCode === 39) {
-                // RIGHT - 39
-                console.log('right');
+                // IF USER PRESSES RIGHT
                 if (this.canMove(this.hero.cell, 'east')) {
+                    // IF HERO CAN MOVE RIGHT
+                    $('.userInfo').html("")
                     if (heroCell === '24') {
+                        // IF HERO IS IN FINAL CELL
                         console.log(this.hero.cell)
                         this.moveHero('east')
                         this.gameOver();
                     } else {
                         if (this.hero.checkRightBorder(heroCell)) {
-                            console.log(this.hero.cell)
+                            // IF HERO IS IN GAME BORDER
                             this.moveHero('east')
-                            $(`.${heroCell}`).removeClass('treasure');
-                            this.hero.wealth += 100;
-                            console.log(this.hero.wealth);
                             $('.wealth span').html(this.hero.wealth);
-                            $(`.${this.hero.cell}`).removeClass('enemy');
+                            this.hero.cell += 1
+                            this.hero.moves += 1;
+                            document.querySelector('.gameScore .moves span').innerHTML = this.hero.moves;
                         }
-                        this.hero.cell += 1
-                        this.hero.moves += 1;
-                        document.querySelector('.gameScore .moves span').innerHTML = this.hero.moves;
                     }
+                } else {
+                    $('.userInfo').html("You can't go that way!")
                 }
-            } else {
-                console.log('error on move')
-            }
+            } else {}
         }
     }
     moveHero(direction) {
@@ -408,46 +407,49 @@ class Maze {
         let currentCell = this.hero.cell
         currentCell = JSON.stringify(currentCell)
         currentCell = parseInt(currentCell)
-        console.log(currentCell + ' CURRENT CELL')
         let downCell = currentCell + 5;
         let rightCell = currentCell + 1;
         let upCell = currentCell - 5
         let leftCell = currentCell - 1;
         if (direction === 'north') {
-            console.log(currentCell)
-            console.log(upCell)
+            // IF NORTH, REMOVE HERO AND REPAINT IN CELL ABOVE
+            // REMOVING TREASURE AND ENEMIES.
             $(`.${currentCell}`).removeClass('hero');
             $(`.${upCell}`).addClass('hero')
-            $(`.${upCell}`).removeClass('treasure')
             $(`.${upCell}`).removeClass('enemy')
+            if ($(`.${upCell}`).hasClass('treasure')) {
+                $(`.${upCell}`).removeClass('treasure')
+                this.hero.wealth += 100;
+            }
         } else if (direction === 'east') {
+            // IF EAST REMOVE HERO AND REPAINT IN CELL RIGHT, REMOVING TREASURE AND ENEMIES
             $(`.${currentCell}`).removeClass('hero');
             $(`.${rightCell}`).addClass('hero')
             $(`.${rightCell}`).removeClass('enemy')
-            $(`.${rightCell}`).removeClass('treasure')
+            if ($(`.${rightCell}`).hasClass('treasure')) {
+                $(`.${rightCell}`).removeClass('treasure')
+                this.hero.wealth += 100;
+            }
         } else if (direction === 'south') {
+            // IF EAST REMOVE HERO AND REPAINT IN CELL BELOW, REMOVING TREASURE AND ENEMIES
             $(`.${currentCell}`).removeClass('hero');
             $(`.${downCell}`).addClass('hero')
             $(`.${downCell}`).removeClass('enemy')
-            $(`.${downCell}`).removeClass('treasure')
+            if ($(`.${downCell}`).hasClass('treasure')) {
+                $(`.${downCell}`).removeClass('treasure')
+                this.hero.wealth += 100;
+            }
         } else if (direction === 'west') {
+            // IF EAST REMOVE HERO AND REPAINT IN CELL LEFT, REMOVING TREASURE AND ENEMIES
             $(`.${currentCell}`).removeClass('hero');
             $(`.${leftCell}`).addClass('hero')
             $(`.${leftCell}`).removeClass('enemy')
-            $(`.${leftCell}`).removeClass('treasure')
+            if ($(`.${leftCell}`).hasClass('treasure')) {
+                $(`.${leftCell}`).removeClass('treasure')
+                this.hero.wealth += 100;
+            }
         }
     }
 }
 
-$.fn.extend({
-    hasClasses: function (selectors) {
-        var self = this;
-        var count = 0;
-        for (var i in selectors) {
-            if ($(self).hasClass(selectors[i])) {
-                count++;
-            }
-        }
-        return count;
-    }
-});
+

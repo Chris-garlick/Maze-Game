@@ -27,6 +27,7 @@
             <div class="wealth">Gold: <span></span></div>
             <div class="moves">Moves: <span>0</span></div>
             <div class="playAgain"><a href="">Play Again</a></div>
+            <div class="userInfo"></div>
         </div>
     </div>
     <script src="Maze.js"></script>
@@ -46,17 +47,24 @@
         maze.createRooms();
         maze.displayRooms();
 
-        // maze.genRooms();
-        // maze.createRooms()
-        // maze.displayRooms()
-        // this.createRooms();
-        // this.displayRooms();
-
-
         $(document).keydown(function(e) {
             maze.movePlayer(e)
         })
     }); 
+
+    $.fn.extend({
+    hasClasses: function (selectors) {
+        // UTILITY FUNCTION FOR FINDING OUT HOW MANY CLASSES A HTML ELEMENT HAS
+        var self = this;
+        var count = 0;
+        for (var i in selectors) {
+            if ($(self).hasClass(selectors[i])) {
+                count++;
+            }
+        }
+        return count;
+    }
+});
     
 
 

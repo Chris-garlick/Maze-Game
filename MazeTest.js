@@ -2,7 +2,7 @@ function TestNewMazeCreation() {
     // CREATES A NEW BASIC MAZE
     let maze = new Maze();
     maze = JSON.stringify(maze)
-    console.assert(maze === '{"rooms":[],"rows":5,"cols":5,"mazeDivs":[],"hero":{"cell":0,"wealth":0,"moves":0}}')
+    console.assert(maze === '{"rooms":[],"mazeDivs":[],"hero":{"cell":0,"wealth":0,"moves":0}}')
 }
 function TestGenRoomsMakes25() {
     // GENERATES A LIST OF 25 ROOMS
@@ -17,11 +17,6 @@ function TestCreateRooms() {
     maze.createRooms();
     console.assert(maze.mazeDivs.length === 25)
 }
-
-// DISPLAY ROOMS MANUAL TEST
-// REMOVE PASSAGES MANUAL TEST
-// CHECK FINAL BORDERS MANUAL TEST
-
 function TestCreateHTMLElement() {
     // TESTS THE CREATION OF A HTML ELEMENT
     let maze = new Maze();
@@ -39,7 +34,6 @@ function TestMoveHero() {
     let newH = $('.5').hasClass('hero')
     let e = $('.5').hasClass('enemy')
     let t = $('.5').hasClass('treasure')
-    console.log(newH + ' new H');
     console.assert(h === false)
     console.assert(newH === true)
     console.assert(e === false)
@@ -78,21 +72,13 @@ function TestCanMoveLeft() {
     let bool = maze.canMove(0, 'west')
     console.assert(bool === false)
 }
-TestNewMazeCreation()
-TestGenRoomsMakes25()
-TestCreateHTMLElement()
-TestMoveHero()
-TestCanMoveTop()
-TestCanMoveRight()
-TestCanMoveBottom()
-TestCanMoveLeft()
-TestCreateRooms()
+// TestNewMazeCreation()
+// TestGenRoomsMakes25()
+// TestCreateHTMLElement()
+// TestMoveHero()
+// TestCanMoveTop()
+// TestCanMoveRight()
+// TestCanMoveBottom()
+// TestCanMoveLeft()
+// TestCreateRooms()
 
-
-// MOVE PLAYER MANUAL TEST
-// COUPLE MORE 
-
-// TO DO 
-
-// TESTS
-// DOCUMENTATION
